@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1649083561 source:c:\users\ufrnlab\desktop\pa\circuito\bool3s.cpp
+	<iostream>
+	"bool3S.h"
+
+1656101339 
+
+1649083561 c:\users\ufrnlab\desktop\pa\circuito\bool3s.h
+	<iostream>
+
+1656101643 source:c:\users\ufrnlab\desktop\pa\circuito\circuito-main.cpp
+	<iostream>
+	<string>
+	"circuito.h"
+
+1656101335 h"
+
+1656102940 c:\users\ufrnlab\desktop\pa\circuito\circuito.h
+	<iostream>
+	<string>
+	<vector>
+	"bool3S.h"
+	"port.h"
+
+1649083561 c:\users\ufrnlab\desktop\pa\circuito\port.h
+	<iostream>
+	<string>
+	<vector>
+	"bool3S.h"
+
+1656101335 source:c:\users\ufrnlab\desktop\pa\circuito\circuito.cpp
+	<fstream>
+	"circuito.h"
+
+1656101339 source:c:\users\ufrnlab\desktop\pa\circuito\port.cpp
+	<fstream>
+	"port.h"
+
+1649083561 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/bool3S.cpp
+	<iostream>
+	"bool3S.h"
+
+1649083561 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/bool3S.h
+	<iostream>
+
+1656101339 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/port.cpp
+	<fstream>
+	"port.h"
+
+1649083561 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/port.h
+	<iostream>
+	<string>
+	<vector>
+	"bool3S.h"
+
+1656259251 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito-main.cpp
+	<iostream>
+	<string>
+	"circuito.h"
+
+1656259386 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.h
+	<iostream>
+	<vector>
+	"bool3S.h"
+	"port.h"
+
+1656259380 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.cpp
+	<iostream>
+	<fstream>
+	"circuito.h"
+
