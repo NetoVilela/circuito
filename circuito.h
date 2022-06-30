@@ -192,7 +192,7 @@ public:
   // 1) Libera a antiga area de memoria: delete ports[IdPort-1]
   // 2) Cria a nova porta: ports[IdPort-1] <- new ... (de acordo com tipo)
   // 3) Fixa o numero de entrada: ports[IdPort-1]->setNumInputs(NIn)
-  void setPort(int IdPort, std::string Tipo, unsigned NIn);
+  void setPort(int IdPort, std::string Tipo, unsigned NIn); // ===== FEITO =====
 
   // Altera a origem da I-esima entrada da porta cuja id eh IdPort, que passa a ser "IdOrig"
   // Depois de VARIOS testes (definedPort, validIndex, validIdOrig)

@@ -3,6 +3,8 @@
 #include "circuito.h"
 #include "string"
 #include "bool3S.h"
+#include "port.h"
+
 using namespace std;
 ///
 /// As strings que definem os tipos de porta
@@ -201,9 +203,16 @@ void setPort(int IdPort, std::string Tipo, unsigned NIn){
   if(validIdPort(IdPort) && validType(Tipo) && validIdInput(NIn)){
     delete ports[IdPort-1];
 
-    // ports[IdPort-1] <- new Port();
+    ports[IdPort-1] = allocPort(Tipo);
+
+    ports[IdPort-1]->setNumInputs(NIn);
   }
 }
+
+void setId_inPort(int IdPort, unsigned I, int IdOrig) const {
+  if(definedPort(IdPort) && ports[IdPort-1]->validIndex(I) && validIdOrig(IdOrig)) ports[IdPort-1]->setId_in(I,IdOrig);
+}
+
 //falta_fazer();
 
 /// ***********************
