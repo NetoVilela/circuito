@@ -54,63 +54,63 @@ int main(void)
   //  case 4:
     //  C.imprimir();
    //   break;
-    case 5:
-      gerarTabela(C);
-      break;
-    default:
-      break;
+    // case 5:
+    //   gerarTabela(C);
+    //   break;
+    // default:
+    //   break;
     }
   } while(opcao != 0);
 }
 
-void gerarTabela(Circuito& C)
-{
-  vector<bool3S> in_circ(C.getNumInputs());
-  int i;
+// void gerarTabela(Circuito& C)
+// {
+//   vector<bool3S> in_circ(C.getNumInputs());
+//   int i;
 
-  // Comeca com todas as entradas indefinidas
-  for (i=0; i<(int)C.getNumInputs(); i++)
-  {
-    in_circ.at(i) = bool3S::UNDEF;
-  }
+//   // Comeca com todas as entradas indefinidas
+//   for (i=0; i<(int)C.getNumInputs(); i++)
+//   {
+//     in_circ.at(i) = bool3S::UNDEF;
+//   }
 
-  cout << "ENTRADAS" << '\t' << "SAIDAS" << endl;
-  do
-  {
-    // Simulacao
-    C.simular(in_circ);
+//   cout << "ENTRADAS" << '\t' << "SAIDAS" << endl;
+//   do
+//   {
+//     // Simulacao
+//     C.simular(in_circ);
 
-    // Impressao das entradas
-    for (i=0; i<(int)C.getNumInputs(); i++)
-    {
-      cout << in_circ.at(i);
-      if (i<(int)C.getNumInputs()-1) cout << ' ';
-      else
-      {
-        cout <<'\t';
-        if (C.getNumInputs()<=2) cout <<'\t';
-      }
-    }
+//     // Impressao das entradas
+//     for (i=0; i<(int)C.getNumInputs(); i++)
+//     {
+//       cout << in_circ.at(i);
+//       if (i<(int)C.getNumInputs()-1) cout << ' ';
+//       else
+//       {
+//         cout <<'\t';
+//         if (C.getNumInputs()<=2) cout <<'\t';
+//       }
+//     }
 
-    // Impressao das saidas
-    for (i=0; i<(int)C.getNumOutputs(); i++)
-    {
-      cout << C.getOutput(i+1);
-      if (i<(int)C.getNumOutputs()-1) cout << ' ';
-      else cout << '\n';
-    }
+//     // Impressao das saidas
+//     for (i=0; i<(int)C.getNumOutputs(); i++)
+//     {
+//       cout << C.getOutput(i+1);
+//       if (i<(int)C.getNumOutputs()-1) cout << ' ';
+//       else cout << '\n';
+//     }
 
-    // Determina qual entrada deve ser incrementada na proxima linha
-    // Incrementa a ultima possivel que nao for TRUE
-    // Se a ultima for TRUE, faz essa ser UNDEF e tenta incrementar a anterior
-    i = int(C.getNumInputs())-1;
-    while (i>=0 && in_circ.at(i)==bool3S::TRUE)
-    {
-      in_circ.at(i)++;
-      i--;
-    };
-    // Incrementa a input selecionada
-    if (i>=0) in_circ.at(i)++;
-  } while (i>=0);
-}
+//     // Determina qual entrada deve ser incrementada na proxima linha
+//     // Incrementa a ultima possivel que nao for TRUE
+//     // Se a ultima for TRUE, faz essa ser UNDEF e tenta incrementar a anterior
+//     i = int(C.getNumInputs())-1;
+//     while (i>=0 && in_circ.at(i)==bool3S::TRUE)
+//     {
+//       in_circ.at(i)++;
+//       i--;
+//     };
+//     // Incrementa a input selecionada
+//     if (i>=0) in_circ.at(i)++;
+//   } while (i>=0);
+// }
 

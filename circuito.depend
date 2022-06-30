@@ -58,14 +58,16 @@
 	<string>
 	"circuito.h"
 
-1656259386 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.h
+1656259392 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.h
 	<iostream>
+	<string>
 	<vector>
 	"bool3S.h"
 	"port.h"
 
-1656259380 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.cpp
+1656546780 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.cpp
 	<iostream>
 	<fstream>
 	"circuito.h"
+	"string"
 

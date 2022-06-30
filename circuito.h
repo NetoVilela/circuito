@@ -35,6 +35,7 @@ private:
   unsigned Nin;
   unsigned Nout;
   unsigned Nportas;
+  vector<ptr_Port> portas;
 
   // Nao precisa manter variaveis para guardar o numero de saidas e ports.
   // Essas informacoes estao armazenadas nos tamanhos (size) dos vetores correspondentes:
@@ -74,7 +75,9 @@ public:
   // utiliza o metodo STL clear para limpar os vetores id_out, out_circ e ports
   // ATENCAO: antes de dar um clear no vetor ports, tem que liberar (delete) as areas
   // de memoria para as quais cada ponteiro desse vetor aponta.
-  void clear();
+  void clear(); //    ======== FEITO ========= 
+  
+  void alloc(unsigned Nentradas, unsigned Nsaidas, unsigned Nport);
 
   // Operador de atribuicao
   // Atribui (faz copia) de Nin e dos vetores id_out e out_circ
@@ -133,23 +136,23 @@ public:
   // Caracteristicas do circuito
 
   // Retorna o numero de entradas Nin
-  unsigned getNumInputs() const;
+  unsigned getNumInputs() const;    // ===== FEITO =====
   // Retorna o tamanho (size) dos vetores correspondentes:
   // id_out e ports, respectivamente
-  unsigned getNumOutputs() const;
-  unsigned getNumPorts() const;
+  unsigned getNumOutputs() const;   // ===== FEITO =====
+  unsigned getNumPorts() const;   // ===== FEITO =====
 
   // Caracteristicas das saidas do circuito
 
   // Retorna a origem (a id) do sinal de saida cuja id eh IdOutput
   // Depois de testar o parametro (validIdOutput), retorna id_out[IdOutput-1]
   // ou 0 se parametro invalido
-  int getIdOutput(int IdOutput) const;
+  int getIdOutput(int IdOutput) const;    // ===== FEITO =====
 
   // Retorna o valor logico atual da saida cuja id eh IdOutput
   // Depois de testar o parametro (validIdOutput), retorna out_circ[IdOutput-1]
   // ou bool3S::UNDEF se parametro invalido
-  bool3S getOutput(int IdOutput) const;
+  bool3S getOutput(int IdOutput) const;    // ===== FEITO =====
 
   // Caracteristicas das portas
 
@@ -157,19 +160,19 @@ public:
   // Depois de testar se a porta existe (definedPort),
   // retorna ports[IdPort-1]->getName()
   // ou "??" se parametro invalido
-  std::string getNamePort(int IdPort) const;
+  std::string getNamePort(int IdPort) const;    // ===== FEITO =====
 
   // Retorna o numero de entradas da porta
   // Depois de testar se a porta existe (definedPort),
   // retorna ports[IdPort-1]->getNumInputs()
   // ou 0 se parametro invalido
-  unsigned getNumInputsPort(int IdPort) const;
+  unsigned getNumInputsPort(int IdPort) const;    // ===== FEITO =====
 
   // Retorna a origem (a id) da I-esima entrada da porta cuja id eh IdPort
   // Depois de testar se a porta existe (definedPort) e o indice da entrada I,
   // retorna ports[IdPort-1]->getId_in(I)
   // ou 0 se parametro invalido
-  int getId_inPort(int IdPort, unsigned I) const;
+  int getId_inPort(int IdPort, unsigned I) const;   // ===== FEITO =====
 
   /// ***********************
   /// Funcoes de modificacao
@@ -180,7 +183,7 @@ public:
   // Altera a origem da saida de id "IdOut", que passa a ser "IdOrig"
   // Depois de testar os parametros (validIdOutput,validIdOrig),
   // faz: id_out[IdOut-1] <- IdOrig
-  void setIdOutput(int IdOut, int IdOrig);
+  void setIdOutput(int IdOut, int IdOrig);    // ===== FEITO =====
 
   // Caracteristicas das ports
 
@@ -194,7 +197,7 @@ public:
   // Altera a origem da I-esima entrada da porta cuja id eh IdPort, que passa a ser "IdOrig"
   // Depois de VARIOS testes (definedPort, validIndex, validIdOrig)
   // faz: ports[IdPort-1]->setId_in(I,Idorig)
-  void setId_inPort(int IdPort, unsigned I, int IdOrig) const;
+  void setId_inPort(int IdPort, unsigned I, int IdOrig) const;    // *********** FAZENDO ***********
 
   /// ***********************
   /// E/S de dados
@@ -209,7 +212,7 @@ public:
   // Em seguida, o usuario digita as ids de todas as saidas, que sao conferidas (validIdOrig).
   // Se o usuario digitar um dado invalido, o metodo deve pedir que ele digite novamente
   // Deve utilizar o metodo digitar da classe Port
-  void digitar();
+  void digitar();   // Fazendo
 
   // Entrada dos dados de um circuito via arquivo
   // Leh do arquivo o cabecalho com o numero de entradas, saidas e portas
@@ -220,7 +223,7 @@ public:
   // Em seguida, leh as ids de todas as saidas, que sao conferidas (validIdOrig)
   // Retorna true se deu tudo OK; false se deu erro.
   // Deve utilizar o metodo ler da classe Port
-  bool ler(const std::string& arq);
+  bool ler(const std::string& arq); // Fazendo
 
   // Saida dos dados de um circuito (em tela ou arquivo, a mesma funcao serve para os dois)
   // Imprime os cabecalhos e os dados do circuito, caso o circuito seja valido

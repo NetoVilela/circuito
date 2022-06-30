@@ -2,6 +2,7 @@
 #include <fstream>
 #include "circuito.h"
 #include "string"
+#include "bool3S.h"
 using namespace std;
 ///
 /// As strings que definem os tipos de porta
@@ -50,6 +51,16 @@ ptr_Port allocPort(std::string& Tipo)
 /// ***********************
 
 Circuito::Circuito(): Nin(0), Nout(0), Nportas(0){}
+
+Circuito::clear()
+{
+  Nin = 0;
+  Nout = 0;
+  Nportas = 0;
+  id_out.clear();
+  out_circ.clear();
+  ports.clear();
+}
 
 //falta_fazer();
 
@@ -129,19 +140,86 @@ bool Circuito::valid() const
 /// Funcoes de consulta
 /// ***********************
 
-//falta_fazer();
+unsigned Circuito::getNumInputs(){
+  return Nin;
+}
+
+unsigned Circuito::getNumOutputs(){
+  return id_out.size();
+}
+
+unsigned Circuito::getNumPorts(){
+  return ports.size();
+}
+
+int Circuito::getIdOutput(int IdOutput) const{
+  if(validIdOutput(IdOutput)){
+    return id_out[IdOutput-1];
+  }
+  return 0;
+}
+
+int Circuito::getOutput(int IdOutput) const{
+  if(validIdOutput(IdOutput)){
+    return out_circ[IdOutput-1];
+  }
+  return bool3S::UNDEF;
+}
+
+string Circuito::getNamePort(int IdPort) const{
+  if(definedPort(IdPort)){
+    return ports[IdPort-1]->getName();
+  }
+  return "??";
+}
+
+unsigned Circuito::getNumInputsPort(int IdPort) const{
+  if(definedPort(IdPort)){
+    return ports[IdPort-1]->getNumInputs();
+  }
+  return 0;
+}
+
+int Circuito::getId_inPort(int IdPort, unsigned I) const{
+  if(definedPort(IdPort)){
+    return ports[IdPort-1]->getId_in(I);
+  }
+  return 0;
+}
 
 /// ***********************
 /// Funcoes de modificacao
 /// ***********************
 
+void Circuito::setIdOutput(int IdOut, int IdOrig){
+  if(validIdOutput(IdOut) && validIdOrig(IdOrig)){
+    id_out[IdOut-1] = IdOrig;
+  }
+}
+
+void setPort(int IdPort, std::string Tipo, unsigned NIn){
+  if(validIdPort(IdPort) && validType(Tipo) && validIdInput(NIn)){
+    delete ports[IdPort-1];
+
+    // ports[IdPort-1] <- new Port();
+  }
+}
 //falta_fazer();
 
 /// ***********************
 /// E/S de dados
 /// ***********************
 
-void Circuito::digitar()  // Função estaá sendo desenvolvida -Neto Vilela
+void Circuito::alloc(unsigned Nentradas, unsigned Nsaidas, unsigned Nport){
+    inputs.resize(Nentradas);
+    id_out.resize(Nsaidas);
+    portas.resize(Nport);
+    Nin = Nentradas;
+    Nout = Nsaidas;
+    Nportas = Nport;
+}
+
+void Circuito::digitar()  // Funï¿½ï¿½o estaï¿½ sendo desenvolvida -Neto Vilela
 {
     unsigned Nentradas;
     unsigned Nsaidas;
@@ -166,26 +244,137 @@ void Circuito::digitar()  // Função estaá sendo desenvolvida -Neto Vilela
     Nout = Nsaidas;
     Nportas = Nport;
 
-    // Lógica para criar as portas
+    Porta_NOT NT;
+    Porta_AND AN;
+    Porta_NAND NA;
+    Porta_OR OR;
+    Porta_NOR NOR;
+    Porta_XOR XO;
+    Porta_NXOR NX;
+
+    // Lï¿½gica para criar as portas
     for(unsigned i = 0; i< Nport; i++){
-        cout << "Portas disponíveis: (NT,AN,NA,OR,NO,XO,NX) \n";
+        cout << "Portas disponï¿½veis: (NT,AN,NA,OR,NO,XO,NX) \n";
         cout << "Informe a porta que deseja criar: \n";
         cin >> sigla_porta;
 
         porta_valida = validType(sigla_porta);
         do{
             cout << "\nA porta digitada eh invalida. Por favor, digite outra porta: \n";
-            cout << "Portas disponíveis: (NT,AN,NA,OR,NO,XO,NX) \n";
+            cout << "Portas disponiveis: (NT,AN,NA,OR,NO,XO,NX) \n";
             cin >> sigla_porta;
             porta_valida = validType(sigla_porta);
         }while(!porta_valida);
-
-
+      
+        if(sigla_porta == "NT") portas[i] = (&NT);
+        else if(sigla_porta == "AN") portas[i] = (&AN);
+        else if(sigla_porta == "NA") portas[i] = (&NA);
+        else if(sigla_porta == "OR") portas[i] = (&OR);
+        else if(sigla_porta == "NO") portas[i] = (&NOR);
+        else if(sigla_porta == "XO") portas[i] = (&XO);
+        else if(sigla_porta == "NX") portas[i] = (&NX);
+        else{
+            cerr << "Essa porta nÃ£o existe";
+            clear();
+            return;
+        }
+        portas[cont] -> digitar();
+        cont++;
+  
+        int ID;
+        for(unsigned i=0; i<Nout; i++)
+        {
+            cout << "ID do sinal que vai para a saida " << i+1 << endl;
+            cin >> ID;
+            if(ID <= Nportas){
+                id_out[i] = ID;
+            }
+            else{
+                cerr << "id invalido.";
+            return;
+        }
     }
 
 
 
 }
+
+bool Circuito::ler(const std::string& arq){
+  ifstream arquivo(arq);
+    string prov, tipo;
+    int NI, NO, NP, Nin;
+    if (arquivo.is_open()){
+        arquivo>>prov>>NI>>NO>>NP;
+        if(prov!="CIRCUITO:"||NI<=0||NO<=0||NP<=0){
+            cerr<<"Erro: Cabecalho 'CIRCUITO:'";
+            return;
+        }
+        clear();
+        alloc(NI,NO,NP);
+        arquivo.ignore(255,'\n');
+
+        arquivo>>prov;
+
+        if(prov!="PORTAS"){
+            cerr<<"Erro: Palavra chave 'PORTAS:'";
+            return;
+        }
+        arquivo.ignore(255,'\n');
+
+        Porta_NOT NT;
+        Porta_AND AN;
+        Porta_NAND NA;
+        Porta_OR OR;
+        Porta_NOR NOR;
+        Porta_XOR XO;
+        Porta_NXOR NX;
+        int i=0, int_prov;
+        do{
+            arquivo >> int_prov;
+            if(int_prov != i+1){
+                cerr<<"Portas fora de ordem, ou faltando\n";
+                return;
+            }
+            arquivo.ignore(255, ' ');
+            arquivo >> tipo;
+            if(tipo == "NT") portas[i] = (&NT) -> clone();
+            else if(tipo == "AN") portas[i] = (&AN) -> clone();
+            else if(tipo == "NA") portas[i] = (&NA) -> clone();
+            else if(tipo == "OR") portas[i] = (&OR) -> clone();
+            else if(tipo == "NO") portas[i] = (&NOR) -> clone();
+            else if(tipo == "XO") portas[i] = (&XO) -> clone();
+            else if(tipo == "NX") portas[i] = (&NX) -> clone();  
+            else cerr<<"Tipo de porta inexistentes";
+            portas[i]->ler(arquivo);
+        }   
+        while(i < NP);
+        arquivo>>prov;
+        if(prov!="SAIDAS:"){
+            cerr<<"Erro: Palavra chave 'SAIDAS:'";
+            return;
+        }
+        arquivo.ignore(255, '\n');
+        i=0;
+        do{
+            arquivo >> int_prov;
+            if(int_prov != i+1){
+                cerr<<"Saidas fora de ordem, ou fantando\n";
+                return;
+            }
+            arquivo.ignore(255, ' ');
+            arquivo >> int_prov;
+            if(int_prov>NP||int_prov==0){
+                cerr<<"Id out > Nportas";
+                return;
+            }
+            id_out[i]=int_prov;
+            i++;
+        }   
+        while(i<NO);
+
+
+    }
+};
 
 //falta_fazer();
 
