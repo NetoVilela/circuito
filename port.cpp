@@ -1,5 +1,9 @@
+#include <iostream>
 #include <fstream>
 #include "port.h"
+#include "bool3S.h"
+
+using namespace std;
 
 //
 // CLASSE PORT
@@ -92,7 +96,7 @@ int Port::getId_in(unsigned I) const
 
 // Fixa o numero de entradas da porta
 // Depois de testar o parametro (validNumInputs), se o novo numero de entradas for igual ao
-// anterior não faz nada; caso seja diferente, redimensiona e inicializa os elementos do
+// anterior nï¿½o faz nada; caso seja diferente, redimensiona e inicializa os elementos do
 // array id_in com valor invalido (0)
 void Port::setNumInputs(unsigned NI)
 {
@@ -223,6 +227,22 @@ std::ostream& operator<<(std::ostream& O, const Port& X)
 ///
 /// AS OUTRAS PORTS
 ///
+
+Port_NOT::Port_NOT(): Port(1) {};
+
+ptr_Port Port_NOT::clone() const{return new Port_NOT(*this);};
+
+string Port_NOT::getName() const {
+  return "NT";
+}
+
+// bool Port_NOT::validNumInputs(unsigned NI) const
+
+void Port_NOT::digitar(){
+    cout<<"ID entrada: ";
+    cin >> id_in[0];
+    out_port = bool3S::UNDEF;
+}
 
 //falta_fazer();
 
