@@ -3,6 +3,9 @@
 #include "port.h"
 #include "bool3S.h"
 
+// Bernardo Fonseca Andrade de Lima
+// Francisco de Assis Vilela Neto
+
 using namespace std;
 
 //
@@ -228,6 +231,8 @@ std::ostream& operator<<(std::ostream& O, const Port& X)
 /// AS OUTRAS PORTS
 ///
 
+
+/// ==================== PORT NOT ======================
 Port_NOT::Port_NOT(): Port(1) {};
 
 ptr_Port Port_NOT::clone() const{return new Port_NOT(*this);};
@@ -236,13 +241,44 @@ string Port_NOT::getName() const {
   return "NT";
 }
 
-// bool Port_NOT::validNumInputs(unsigned NI) const
+bool Port_NOT::validNumInputs(unsigned NI) const{
+    return NI == 1;
+}
 
 void Port_NOT::digitar(){
-    cout<<"ID entrada: ";
+    Nin = 1;
+    cout<<"ID entrada: \n";
     cin >> id_in[0];
-    out_port = bool3S::UNDEF;
+    do{
+        cout<<"ID invalido. Por favor, digite outro id: \n";
+        cin >> id_in[0];
+    }while(!validIndex(id_in[0]));
+}
+
+void Port_NOT::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+    out_port = ~in_port.at(0);  // ou ~in_port[0];
+}
+
+/// ==================== PORT AND ======================
+
+Port_AND::Port_AND(): Port(){};
+
+ptr_Port Port_AND::clone() const{return new Port_AND(*this);};
+
+string Port_AND::getName() const {
+  return "AN";
+}
+
+void Port_AND::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+    // Tem um for no AND para sair testando com os casos do & da classe Bool3S
 }
 
 //falta_fazer();
-

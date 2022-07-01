@@ -6,6 +6,9 @@
 #include <vector>
 #include "bool3S.h"
 
+// Bernardo Fonseca Andrade de Lima
+// Francisco de Assis Vilela Neto
+
 /// ###########################################################################
 /// ATENCAO PARA A CONVENCAO DOS NOMES E TIPOS PARA OS PARAMETROS DAS FUNCOES:
 /// unsigned I: indice (de entrada de porta): de 0 a NInputs-1
@@ -43,11 +46,11 @@ public:
   // Construtor (recebe como parametro o numero de entradas da porta)
   // Testa o parametro (validNumInputs), dimensiona e inicializa os elementos
   // do array id_in com valor invalido (0), inicializa out_port com UNDEF
-  Port(unsigned NI=2);
+  Port(unsigned NI=2);  // ===== FEITO =====
   // Construtor por copia
-  Port(const Port& );
+  Port(const Port& );      // ===== FEITO =====
   // Destrutor virtual
-  virtual ~Port();
+  virtual ~Port();      // ===== FEITO =====
 
   // Essa funcao virtual pura deve criar e retornar um ponteiro para Port que aponta para
   // uma copia de si mesma, do tipo correto.
@@ -65,12 +68,12 @@ public:
   virtual bool validNumInputs(unsigned NI) const;
 
   // Retorna true se um indice (qual entrada da porta) eh valido (entre 0 e NumInputs-1)
-  bool validIndex(unsigned I) const;
+  bool validIndex(unsigned I) const;        // ===== FEITO =====
 
   // Retorna true se a porta eh valida (estah com todos os dados corretos):
   // - validNumInputs eh true
   // - Todas as id de entrada da porta sao diferentes de zero.
-  bool valid() const;
+  bool valid() const;       // ===== FEITO =====
 
   /// ***********************
   /// Funcoes de consulta
@@ -81,14 +84,14 @@ public:
   virtual std::string getName() const = 0;
 
   // Caracteristicas da porta
-  unsigned getNumInputs() const;
+  unsigned getNumInputs() const;    // ===== FEITO =====
 
   // Saida logica da porta
-  bool3S getOutput() const;
+  bool3S getOutput() const;     // ===== FEITO =====
 
   // Depois de testar o parametro (validIndex), retorna o valor de id_in[I]
   // ou 0 se indice invalido
-  int getId_in(unsigned I) const;
+  int getId_in(unsigned I) const;       // ===== FEITO =====
 
   /// ***********************
   /// Funcoes de modificacao
@@ -96,16 +99,16 @@ public:
 
   // Fixa o numero de entradas da porta
   // Depois de testar o parametro (validNumInputs), se o novo numero de entradas for igual ao
-  // anterior n„o faz nada; caso seja diferente, redimensiona e inicializa os elementos do
+  // anterior n√£o faz nada; caso seja diferente, redimensiona e inicializa os elementos do
   // array id_in com valor invalido (0)
-  void setNumInputs(unsigned NI);
+  void setNumInputs(unsigned NI);       // ===== FEITO =====
 
   // Fixa o valor logico da saida da porta (?, F, T)
-  void setOutput(bool3S S);
+  void setOutput(bool3S S);     // ===== FEITO =====
 
   // Fixa a origem do sinal da I-esima entrada da porta como sendo Id
   // Depois de testar os parametros (validIndex, Id!=0), faz: id_in[I] <- Id
-  void setId_in(unsigned I, int Id);
+  void setId_in(unsigned I, int Id);        // ===== FEITO =====
 
   /// ***********************
   /// E/S de dados
@@ -137,7 +140,7 @@ public:
   // (NT,AN,NA,OR,NO,XO,NX). Esse valor jah deve ter sido lido previamente e a porta
   // criada dinamicamente do tipo certo, para que seja chamado o metodo virtual ler
   // apropriado para o tipo de porta.
-  bool ler(std::istream& ArqI);
+  bool ler(std::istream& ArqI);     // ===== FEITO =====
 
   // Imprime a porta na ostrem ArqO (cout ou uma stream de arquivo, tanto faz)
   // Imprime:
@@ -150,7 +153,7 @@ public:
   // Os outros dados a serem impressos sao iguais em todas as portas
   // Retorna a propria ostream O recebida como parametro de entrada, para que possa
   // ser encadeada
-  std::ostream& imprimir(std::ostream& ArqO) const;
+  std::ostream& imprimir(std::ostream& ArqO) const;     // ===== FEITO =====
 
   /// ***********************
   /// SIMULACAO (funcao principal da porta)
@@ -158,7 +161,7 @@ public:
 
   // Simula uma porta logica
   // Recebe um vector de bool3S com os valores logicos atuais das entradas da porta
-  // Testa se a dimensao do vetor eh igual ao numero de entradas da porta; se n„o for,
+  // Testa se a dimensao do vetor eh igual ao numero de entradas da porta; se n√£o for,
   // faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
@@ -168,7 +171,7 @@ public:
 
 // Operador << com comportamento polimorfico
 // Serve para todas as ports (NO, AND, NOR, etc.)
-std::ostream& operator<<(std::ostream& O, const Port& X);
+std::ostream& operator<<(std::ostream& O, const Port& X);       // ===== FEITO =====
 
 ///
 /// As outras PORTS
@@ -176,37 +179,37 @@ std::ostream& operator<<(std::ostream& O, const Port& X);
 
 class Port_NOT: public Port {
 public:
-  Port_NOT();
+  Port_NOT();   // ===== FEITO ======
   // Retorna new Port_NOT(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;       // ===== FEITO ======
   // Retorna "NT"
-  std::string getName() const;
+  std::string getName() const;      // ===== FEITO ======
 
-  bool validNumInputs(unsigned NI) const;
+  bool validNumInputs(unsigned NI) const;       // ===== FEITO ======
 
   // Leh uma porta NOT do teclado. O usuario deve digitar:
   // - a id da entrada da porta
   // (nao deve ser solicitado a digitar o numero de entradas, que eh sempre 1)
   // Se o usuario digitar um dado invalido, o metodo deve pedir que ele digite novamente
-  void digitar();
+  void digitar();   // ===== FEITO ======
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta (1);
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);     // ===== FEITO ======
 };
 
 class Port_AND: public Port {
 public:
-  Port_AND();
+  Port_AND();       // ===== FEITO =====
   // Retorna new Port_AND(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;   // ===== FEITO =====
   // Retorna "AN"
-  std::string getName() const;
+  std::string getName() const;  // ===== FEITO =====
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
   void simular(const std::vector<bool3S>& in_port);
@@ -221,7 +224,7 @@ public:
   std::string getName() const;
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
   void simular(const std::vector<bool3S>& in_port);
@@ -236,7 +239,7 @@ public:
   std::string getName() const;
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
   void simular(const std::vector<bool3S>& in_port);
@@ -251,7 +254,7 @@ public:
   std::string getName() const;
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
   void simular(const std::vector<bool3S>& in_port);
@@ -266,7 +269,7 @@ public:
   std::string getName() const;
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
   void simular(const std::vector<bool3S>& in_port);
@@ -281,7 +284,7 @@ public:
   std::string getName() const;
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
-  // se n„o for, faz out_port <- UNDEF e retorna.
+  // se n√£o for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
   void simular(const std::vector<bool3S>& in_port);

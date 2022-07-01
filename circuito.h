@@ -7,6 +7,9 @@
 #include "bool3S.h"
 #include "port.h"
 
+// Bernardo Fonseca Andrade de Lima
+// Francisco de Assis Vilela Neto
+
 using namespace std;
 
 /// ###########################################################################
@@ -61,7 +64,7 @@ public:
   // As variaveis do tipo Circuit sao sempre criadas sem nenhum dado
   // A definicao do numero de entradas, saidas e ports eh feita ao ler do teclado ou arquivo
   // ou ao executar o metodo resize
-  Circuito();
+  Circuito();       // ===== FEITO =====
 
   // Construtor por copia
   // Nin e os vetores id_out e out_circ serao copias dos equivalentes no Circuit C
@@ -69,15 +72,15 @@ public:
   // Serah necessario utilizar a funcao virtual clone para criar copias das portas
   Circuito(const Circuito& C);
   // Destrutor: apenas chama a funcao clear()
-  ~Circuito();
+  ~Circuito();          // ====== FEITO ======
 
   // Limpa todo o conteudo do circuito. Faz Nin <- 0 e
-  // utiliza o metodo STL clear para limpar os vetores id_out, out_circ e ports
+  // utili      wza o metodo STL clear para limpar os vetores id_out, out_circ e ports
   // ATENCAO: antes de dar um clear no vetor ports, tem que liberar (delete) as areas
   // de memoria para as quais cada ponteiro desse vetor aponta.
-  void clear(); //    ======== FEITO ========= 
-  
-  void alloc(unsigned Nentradas, unsigned Nsaidas, unsigned Nport);
+  void clear(); //    ======== FEITO =========
+
+  void alloc(unsigned Nentradas, unsigned Nsaidas, unsigned Nport); // ===== FEITO =====
 
   // Operador de atribuicao
   // Atribui (faz copia) de Nin e dos vetores id_out e out_circ
@@ -101,33 +104,33 @@ public:
   /// ***********************
 
   // Retorna true se IdInput eh uma id de entrada do circuito valida (entre -1 e -NInput)
-  bool validIdInput(int IdInput) const;
+  bool validIdInput(int IdInput) const;     // ===== FEITO =====
 
   // Retorna true se IdOutput eh uma id de saida do circuito valida (entre 1 e NOutput)
-  bool validIdOutput(int IdOutput) const;
+  bool validIdOutput(int IdOutput) const;       // ===== FEITO =====
 
   // Retorna true se IdPort eh uma id de porta do circuito valida (entre 1 e NPort)
-  bool validIdPort(int IdPort) const;
+  bool validIdPort(int IdPort) const;       // ===== FEITO =====
 
   // Retorna true se IdOrig eh uma id valida para a origem do sinal de uma entrada de porta ou
   // para a origem de uma saida do circuito (podem vir de uma entrada do circuito ou de uma porta)
   // validIdOrig == validIdInput OR validIdPort
-  bool validIdOrig(int IdOrig) const;
+  bool validIdOrig(int IdOrig) const;       // ===== FEITO =====
 
   // Retorna true se IdPort eh uma id de porta valida (validIdPort) e
   // a porta estah definida (estah alocada, ou seja, != nullptr)
-  bool definedPort(int IdPort) const;
+  bool definedPort(int IdPort) const;       // ===== FEITO =====
 
   // Retorna true se IdPort eh uma porta existente (definedPort) e
   // todas as entradas da porta com Id de origem valida (usa getId_inPort e validIdOrig)
-  bool validPort(int IdPort) const;
+  bool validPort(int IdPort) const;     // ===== FEITO =====
 
   // Retorna true se o circuito eh valido (estah com todos os dados corretos):
   // - numero de entradas, saidas e portas valido (> 0)
   // - todas as portas validas (usa validPort)
   // - todas as saidas com Id de origem validas (usa getIdOutput e validIdOrig)
   // Essa funcao deve ser usada antes de salvar ou simular um circuito
-  bool valid() const;
+  bool valid() const;       // ===== FEITO =====
 
   /// ***********************
   /// Funcoes de consulta
@@ -197,7 +200,7 @@ public:
   // Altera a origem da I-esima entrada da porta cuja id eh IdPort, que passa a ser "IdOrig"
   // Depois de VARIOS testes (definedPort, validIndex, validIdOrig)
   // faz: ports[IdPort-1]->setId_in(I,Idorig)
-  void setId_inPort(int IdPort, unsigned I, int IdOrig) const;    // *********** FAZENDO ***********
+  void setId_inPort(int IdPort, unsigned I, int IdOrig) const;   // ===== FEITO =====
 
   /// ***********************
   /// E/S de dados

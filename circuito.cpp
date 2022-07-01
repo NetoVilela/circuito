@@ -5,6 +5,9 @@
 #include "bool3S.h"
 #include "port.h"
 
+// Bernardo Fonseca Andrade de Lima
+// Francisco de Assis Vilela Neto
+
 using namespace std;
 ///
 /// As strings que definem os tipos de porta
@@ -62,6 +65,17 @@ Circuito::clear()
   id_out.clear();
   out_circ.clear();
   ports.clear();
+}
+
+Circuito::~Circuito(){ clear(); }
+
+void Circuito::alloc(unsigned Nentradas, unsigned Nsaidas, unsigned Nport){
+    inputs.resize(Nentradas);
+    id_out.resize(Nsaidas);
+    portas.resize(Nport);
+    Nin = Nentradas;
+    Nout = Nsaidas;
+    Nportas = Nport;
 }
 
 //falta_fazer();
@@ -219,15 +233,6 @@ void setId_inPort(int IdPort, unsigned I, int IdOrig) const {
 /// E/S de dados
 /// ***********************
 
-void Circuito::alloc(unsigned Nentradas, unsigned Nsaidas, unsigned Nport){
-    inputs.resize(Nentradas);
-    id_out.resize(Nsaidas);
-    portas.resize(Nport);
-    Nin = Nentradas;
-    Nout = Nsaidas;
-    Nportas = Nport;
-}
-
 void Circuito::digitar()  // Fun��o esta� sendo desenvolvida -Neto Vilela
 {
     unsigned Nentradas;
@@ -274,7 +279,7 @@ void Circuito::digitar()  // Fun��o esta� sendo desenvolvida -Neto Vilela
             cin >> sigla_porta;
             porta_valida = validType(sigla_porta);
         }while(!porta_valida);
-      
+
         if(sigla_porta == "NT") portas[i] = (&NT);
         else if(sigla_porta == "AN") portas[i] = (&AN);
         else if(sigla_porta == "NA") portas[i] = (&NA);
@@ -289,7 +294,7 @@ void Circuito::digitar()  // Fun��o esta� sendo desenvolvida -Neto Vilela
         }
         portas[cont] -> digitar();
         cont++;
-  
+
         int ID;
         for(unsigned i=0; i<Nout; i++)
         {
@@ -352,10 +357,10 @@ bool Circuito::ler(const std::string& arq){
             else if(tipo == "OR") portas[i] = (&OR) -> clone();
             else if(tipo == "NO") portas[i] = (&NOR) -> clone();
             else if(tipo == "XO") portas[i] = (&XO) -> clone();
-            else if(tipo == "NX") portas[i] = (&NX) -> clone();  
+            else if(tipo == "NX") portas[i] = (&NX) -> clone();
             else cerr<<"Tipo de porta inexistentes";
             portas[i]->ler(arquivo);
-        }   
+        }
         while(i < NP);
         arquivo>>prov;
         if(prov!="SAIDAS:"){
@@ -378,7 +383,7 @@ bool Circuito::ler(const std::string& arq){
             }
             id_out[i]=int_prov;
             i++;
-        }   
+        }
         while(i<NO);
 
 
