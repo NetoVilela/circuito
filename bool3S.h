@@ -5,7 +5,8 @@
 
 // Criando um tipo de dados enumerado (bool3S) para representar um booleano com 3 estados:
 // bool3S::TRUE, bool3S::FALSE e bool3S::UNDEF
-enum class bool3S {
+enum class bool3S
+{
   UNDEF,
   FALSE,
   TRUE
@@ -18,23 +19,23 @@ enum class bool3S {
 bool3S operator~(bool3S x);
 // AND 3S
 bool3S operator&(bool3S x1, bool3S x2);
-void operator&=(bool3S& x1, bool3S x2);
+void operator&=(bool3S &x1, bool3S x2);
 // OR 3S
 bool3S operator|(bool3S x1, bool3S x2);
-void operator|=(bool3S& x1, bool3S x2);
+void operator|=(bool3S &x1, bool3S x2);
 // XOR 3S
 bool3S operator^(bool3S x1, bool3S x2);
-void operator^=(bool3S& x1, bool3S x2);
+void operator^=(bool3S &x1, bool3S x2);
 
 // Os operadores de incremento/decremento para a classe bool3S
 
 // Os operadores prefixados (++B, --B: incrementa, depois retorna)
-bool3S& operator++(bool3S& B);
-bool3S& operator--(bool3S& B);
+bool3S &operator++(bool3S &B);
+bool3S &operator--(bool3S &B);
 // Os operadores posfixados (B++, B--: retorna copia do valor antes de incrementar)
 // O parametro int nao serve para nada, apenas diferencia dos prefixados
-bool3S operator++(bool3S& B, int);
-bool3S operator--(bool3S& B, int);
+bool3S operator++(bool3S &B, int);
+bool3S operator--(bool3S &B, int);
 
 // As conversoes entre bool3S e char
 
@@ -46,8 +47,8 @@ bool3S toBool3S(char C);
 // Os operadores de entrada/saida para a classe bool3S
 
 // Impressao (imprime ? T F se for bool3S::UNDEF bool3S::TRUE bool3S::FALSE)
-std::ostream& operator<<(std::ostream& O, bool3S x);
+std::ostream &operator<<(std::ostream &O, bool3S x);
 // Leitura (leh os caracteres ? T F e seta o valor do bool3S para bool3S::UNDEF bool3S::TRUE bool3S::FALSE)
-std::istream& operator>>(std::istream& I, bool3S& x);
+std::istream &operator>>(std::istream &I, bool3S &x);
 
 #endif // _BOOL3S_H_
