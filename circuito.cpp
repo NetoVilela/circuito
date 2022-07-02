@@ -442,11 +442,12 @@ bool Circuito::ler(const std::string &arq)
       else
         cout << "Tipo de porta inexistentes";
 
-      if(!ports[i]->ler(arquivo)){
-        cout << "Erro: Não foi possivel ler o arquivo para a porta i = " << i+1 << endl;
-        return false; 
-      }  
-      
+      if (!ports[i]->ler(arquivo))
+      {
+        cout << "Erro: Não foi possivel ler o arquivo para a porta i = " << i + 1 << endl;
+        return false;
+      }
+
     } while (i < NP);
 
     arquivo >> prov;
@@ -488,4 +489,47 @@ bool Circuito::ler(const std::string &arq)
 /// SIMULACAO (funcao principal do circuito)
 /// ***********************
 
-// falta_fazer();
+bool Circuito::simular(const std::vector<bool3S> &in_circ)
+{
+  bool tudo_def, alguma_def;
+  vector<bool3S> in_port;
+
+  for (unsigned i = 0; i < Nportas; i++)
+  {
+    ports[i]->setOutput(bool3S::UNDEF);
+  }
+
+  do
+  {
+    tudo_def = true;
+    alguma_def = false;
+
+    for (unsigned i = 0; i < Nportas; i++)
+    {
+      if (ports[i]->getOutput() == bool3S::UNDEF)
+      {
+
+        for (unsigned j = 0; j < ports[i]->getNumInputs(); i++)
+        {
+          if (ports[i]->getId_in(j) > 0){
+            in_port[j] = ports[ports[i]->getId_in(j) - 1]->getOutput();
+          }
+          else {
+            in_port[j] = in_circ[-1 * (ports[i]->getId_in(j)) - 1];
+          }
+        }
+
+        ports[i]->simular(in_port);
+
+        if (ports[i]->getOutput() == bool3S::UNDEF)
+        {
+          tudo_def = false;
+        }
+        else
+        {
+          alguma_def = true;
+        }
+      }
+    }
+  } while (!tudo_def && alguma_def);
+}
