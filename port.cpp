@@ -278,7 +278,198 @@ void Port_AND::simular(const std::vector<bool3S>& in_port){
         out_port = bool3S::UNDEF;
         return ;
     }
-    // Tem um for no AND para sair testando com os casos do & da classe Bool3S
+    // Verifica o primeiro elemento
+    out_port = in_port[0]; 
+    if(!out_port){  
+      out_port = bool3S::FALSE;
+      return; 
+    }
+   
+    for(unsigned i = 0; i < getNumInputs(); i++){
+      if(validIndex(i)){
+        out_port &= in_port[i+1];
+        if(!out_port){  
+            out_port = bool3S::FALSE;
+            break;
+            return; 
+        }
+      }
+    }
+    out_port = bool3S::TRUE;
 }
 
+
+/// ==================== PORT NAND ======================
+Port_NAND::Port_NAND(): Port(){};
+
+ptr_Port Port_NAND::clone() const{return new Port_NAND(*this);};
+
+string Port_NAND::getName() const {
+  return "NA";
+}
+
+void Port_NAND::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+
+    out_port = in_port[0]; 
+    if(!out_port){  
+      out_port = bool3S::TRUE;
+      return; 
+    }
+   
+    for(unsigned i = 0; i < getNumInputs(); i++){
+      if(validIndex(i)){
+        out_port &= in_port[i+1];
+        if(!out_port){  
+            out_port = bool3S::TRUE;
+            break;
+            return; 
+        }
+      }
+    }
+    out_port = bool3S::FALSE;
+}
+
+/// ==================== PORT OR ======================
+Port_OR::Port_OR(): Port(){};
+
+ptr_Port Port_OR::clone() const{return new Port_OR(*this);};
+
+string Port_OR::getName() const {
+  return "OR";
+}
+
+void Port_OR::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+
+    out_port = in_port[0]; 
+    if(out_port){  
+      out_port = bool3S::TRUE;
+      return; 
+    }
+   
+    for(unsigned i = 0; i < getNumInputs(); i++){
+      if(validIndex(i)){
+        out_port |= in_port[i+1];
+        if(out_port){  
+            out_port = bool3S::TRUE;
+            break;
+            return; 
+        }
+      }
+    }
+    out_port = bool3S::FALSE;
+}
+
+/// ==================== PORT NOR ======================
+Port_NOR::Port_NOR(): Port(){};
+
+ptr_Port Port_NOR::clone() const{return new Port_NOR(*this);};
+
+string Port_NOR::getName() const {
+  return "NO";
+}
+
+void Port_NOR::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+
+    out_port = in_port[0]; 
+    if(out_port){  
+      out_port = bool3S::FALSE;
+      return; 
+    }
+   
+    for(unsigned i = 0; i < getNumInputs(); i++){
+      if(validIndex(i)){
+        out_port |= in_port[i+1];
+        if(out_port){  
+            out_port = bool3S::FALSE;
+            break;
+            return; 
+        }
+      }
+    }
+    out_port = bool3S::TRUE;
+}
+
+/// ==================== PORT XOR ======================
+Port_XOR::Port_XOR(): Port(){};
+
+ptr_Port Port_XOR::clone() const{return new Port_XOR(*this);};
+
+string Port_XOR::getName() const {
+  return "XO";
+}
+
+void Port_XOR::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+
+    bool out_port = in_port[0];
+    // Exemplo de XOR
+    // 0 1 0 0 1 
+    // 1 0 0 1
+    // 1 0 1
+    // 1 1 
+    // 0
+    for(unsigned i = 0; i < getNumInputs(); i++){
+      if(validIndex(i)){
+        out_port ^= in_port[i+1];
+      }
+    }
+    if(out_port){
+      out_port = bool3S::TRUE;
+      return ;
+    } 
+    out_port = bool3S::FALSE; 
+    
+}
+
+/// ==================== PORT NXOR ======================
+
+Port_NXOR::Port_NXOR(): Port(){};
+
+ptr_Port Port_NXOR::clone() const{return new Port_NXOR(*this);};
+
+string Port_NXOR::getName() const {
+  return "NX";
+}
+
+void Port_NXOR::simular(const std::vector<bool3S>& in_port){
+    if(*in_port.size() != getNumInputs()){
+        out_port = bool3S::UNDEF;
+        return ;
+    }
+
+    out_port = in_port[0];
+    // Exemplo de NXOR
+    // 0 1 0 0 1 
+    // 1 0 0 1
+    // 1 0 1
+    // 1 1 
+    // 0
+    // 1
+    for(unsigned i = 0; i < getNumInputs(); i++){
+      if(validIndex(i)){
+        out_port ^= in_port[i+1];
+      }
+    }
+    if(out_port){
+      out_port = bool3S::FALSE;
+      return ;
+    } 
+    out_port = bool3S::TRUE; 
+    
+}
 //falta_fazer();

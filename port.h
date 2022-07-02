@@ -212,82 +212,82 @@ public:
   // se não for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);   // ===== FEITO (verificar) =====
 };
 
 class Port_NAND: public Port {
 public:
-  Port_NAND();
+  Port_NAND();    // ===== FEITO =====
   // Retorna new Port_NAND(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;     // ===== FEITO =====
   // Retorna "NA"
-  std::string getName() const;
+  std::string getName() const;    // ===== FEITO =====
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
   // se não for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);     // ===== FEITO (verificar) =====
 };
 
 class Port_OR: public Port {
 public:
-  Port_OR();
+  Port_OR();    // ===== FEITO =====
   // Retorna new Port_OR(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;   // ===== FEITO =====
   // Retorna "OR"
-  std::string getName() const;
+  std::string getName() const;    // ===== FEITO =====
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
   // se não for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);   // ===== FEITO =====
 };
 
 class Port_NOR: public Port {
 public:
-  Port_NOR();
+  Port_NOR();   // ===== FEITO =====
   // Retorna new Port_NOR(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;     // ===== FEITO =====
   // Retorna "NO"
-  std::string getName() const;
+  std::string getName() const;    // ===== FEITO =====
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
   // se não for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);   // ===== FEITO =====
 };
 
 class Port_XOR: public Port {
 public:
-  Port_XOR();
+  Port_XOR();   // ===== FEITO =====
   // Retorna new Port_XOR(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;     // ===== FEITO =====
   // Retorna "XO"
-  std::string getName() const;
+  std::string getName() const;    // ===== FEITO =====
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
   // se não for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);   // ===== FEITO =====
 };
 
 class Port_NXOR: public Port {
 public:
-  Port_NXOR();
+  Port_NXOR();    // ===== FEITO =====
   // Retorna new Port_NXOR(*this)
-  ptr_Port clone() const;
+  ptr_Port clone() const;   // ===== FEITO =====
   // Retorna "NX"
-  std::string getName() const;
+  std::string getName() const;    // ===== FEITO =====
 
   // Testa se a dimensao do vetor in_port eh igual ao numero de entradas da porta;
   // se não for, faz out_port <- UNDEF e retorna.
   // Armazena o valor bool3S com o resultado da simulacao (saida da porta)
   // no dado "out_port" da porta
-  void simular(const std::vector<bool3S>& in_port);
+  void simular(const std::vector<bool3S>& in_port);   // ===== FEITO =====
 };
 
 #endif // _PORT_H_
