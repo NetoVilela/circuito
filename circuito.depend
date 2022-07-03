@@ -36,38 +36,42 @@
 	<fstream>
 	"port.h"
 
-1649083561 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/bool3S.cpp
+1656867333 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/bool3S.cpp
 	<iostream>
 	"bool3S.h"
 
-1649083561 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/bool3S.h
+1656867333 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/bool3S.h
 	<iostream>
 
-1656101339 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/port.cpp
+1656873820 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/port.cpp
+	<iostream>
 	<fstream>
 	"port.h"
+	"bool3S.h"
 
-1649083561 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/port.h
+1656867333 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/port.h
 	<iostream>
 	<string>
 	<vector>
 	"bool3S.h"
 
-1656259251 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito-main.cpp
+1656874419 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito-main.cpp
 	<iostream>
 	<string>
 	"circuito.h"
 
-1656259392 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.h
+1656868846 /home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.h
 	<iostream>
 	<string>
 	<vector>
 	"bool3S.h"
 	"port.h"
 
-1656546780 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.cpp
+1656875581 source:/home/neto/Documentos/progamacao_avancada/circuito/Circuito/circuito.cpp
 	<iostream>
 	<fstream>
 	"circuito.h"
 	"string"
+	"bool3S.h"
+	"port.h"
 

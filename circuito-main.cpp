@@ -29,28 +29,28 @@ int main(void)
       C.digitar();
       break;
     case 2:
-   // case 3:
+   case 3:
       // Antes de ler a string com o nome do arquivo, esvaziar o buffer do teclado
-    //  cin.ignore(256,'\n');
-     // do {
-   //     cout << "Arquivo: ";
-      //  getline(cin,nome);
-    //  } while (nome.size() < 3); // Name do arquivo >= 3 caracteres
-     // if (opcao==3) {
-      //  if (!C.ler(nome))
-      //  {
+     cin.ignore(256,'\n');
+     do {
+       cout << "Arquivo: ";
+       getline(cin,nome);
+     } while (nome.size() < 3); // Name do arquivo >= 3 caracteres
+     if (opcao==3) {
+       if (!C.ler(nome))
+       {
           // Erro na leitura
-     //     cerr << "Arquivo " << nome << " invalido para leitura\n";
-     //   }
-    //  }
-     // else {
-     //   if (!C.salvar(nome))
-     //   {
-          // Erro no salvamento
-          cerr << "Arquivo " << nome << " invalido para escrita\n";
-     //   }
-     // }
-      //break;
+         cerr << "Arquivo " << nome << " invalido para leitura\n";
+       }
+     }
+     else {
+      //  if (!C.salvar(nome))
+      //  {
+      //     // Erro no salvamento
+      //     cerr << "Arquivo " << nome << " invalido para escrita\n";
+      //  }
+     }
+      break;
   //  case 4:
     //  C.imprimir();
    //   break;

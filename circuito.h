@@ -94,7 +94,7 @@ public:
   // id_out[i] <- 0
   // out_circ[i] <- UNDEF
   // ports[i] <- nullptr
-  void resize(unsigned NI, unsigned NO, unsigned NP);   // ===== FEITO =====
+  void resize(unsigned int NI, unsigned int NO, unsigned int NP);   // ===== FEITO =====
 
   /// ***********************
   /// Funcoes de testagem

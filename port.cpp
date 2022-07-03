@@ -243,7 +243,7 @@ std::ostream &operator<<(std::ostream &O, const Port &X)
 /// ==================== PORT NOT ======================
 Port_NOT::Port_NOT() : Port(1){};
 
-ptr_Port Port_NOT::clone() const { return new Port_NOT(*this); };
+ptr_Port Port_NOT::clone() const { return new Port_NOT(); };
 
 string Port_NOT::getName() const
 {
@@ -260,11 +260,11 @@ void Port_NOT::digitar()
   id_in.resize(1);
   cout << "ID entrada: \n";
   cin >> id_in[0];
-  do
+  while (!validIndex(id_in[0]))
   {
     cout << "ID invalido. Por favor, digite outro id: \n";
     cin >> id_in[0];
-  } while (!validIndex(id_in[0]));
+  }
 }
 
 void Port_NOT::simular(const std::vector<bool3S> &in_port)
